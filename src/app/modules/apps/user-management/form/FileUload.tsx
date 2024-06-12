@@ -5,11 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { Button, Typography } from "@mui/material";
 import CircleLoader from "../components/CircleLoader"; // Update the path as needed
 import { FaCheck, FaFileImage } from "react-icons/fa";
+import cloud from "../../../../../_metronic/assets/images/Subtract.png";
+import fileImage from "../../../../../_metronic/assets/images/file.png";
 
-// interface MyDropzoneProps {
-//   date: Date;
-//   setChange: (value: number) => void;
-// }
+interface MyDropzoneProps {
+  handleChangeStep: () => void;
+}
 
 const dropzoneStyle = {
   backgroundColor: "#ffffff0d",
@@ -26,8 +27,9 @@ const dropzoneStyle = {
   marginTop: "8px",
   margin: "5px",
 };
-const MyDropzone: React.FC = () => {
-  //   const { date, setChange } = props;
+
+const MyDropzone: React.FC<MyDropzoneProps> = (props) => {
+  const { handleChangeStep } = props;
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [view, setView] = useState(false);
@@ -94,10 +96,10 @@ const MyDropzone: React.FC = () => {
     <>
       {file?.length > 0 ? (
         <>
-          <div style={{ dropzoneStyle }}>
+          <div style={dropzoneStyle}>
             {/* <CiFileOn className='display-1' style={{ color: "#92AFF8" }} /> */}
             <img
-              src={FaFileImage}
+              src={fileImage}
               alt="file"
               width={"69px"}
               height={"103px"}
@@ -125,7 +127,7 @@ const MyDropzone: React.FC = () => {
                     onClick={() => handleRedirect()}
                     className="Manrope"
                     style={{
-                      backgroundColor: "#222e93",
+                      backgroundColor: "#1B84FF",
                       marginTop: "30px",
                       marginBottom: "10px",
                       fontSize: "16px",
@@ -141,11 +143,11 @@ const MyDropzone: React.FC = () => {
                   <Button
                     variant="contained"
                     startIcon={<FaCheck />}
-                    onClick={() => setChange(2)}
+                    onClick={() => handleChangeStep()}
                     className="Manrope"
                     style={{
                       boxShadow: "none",
-                      backgroundColor: "#32D65B",
+                      backgroundColor: "#1B84FF",
                       marginTop: "30px",
                       fontSize: "14px",
                       marginBottom: "8px",
@@ -188,13 +190,13 @@ const MyDropzone: React.FC = () => {
         <>
           <div {...getRootProps()} style={dropzoneStyle}>
             {/* <FaCloudUploadAlt className='display-1 text-primary' /> */}
-            {/* <img
+            <img
               src={cloud}
               alt="cloud"
               width={"95px"}
               height={"70px"}
               style={{ marginBottom: "29px" }}
-            /> */}
+            />
 
             <Typography
               style={{ fontWeight: "bold", fontSize: "18px" }}
@@ -234,7 +236,7 @@ const MyDropzone: React.FC = () => {
                 variant="contained"
                 className="Manrope"
                 style={{
-                  backgroundColor: "#222e93",
+                  backgroundColor: "#1B84FF",
                   marginTop: "12px",
                   fontSize: "14px",
                   fontWeight: "600",

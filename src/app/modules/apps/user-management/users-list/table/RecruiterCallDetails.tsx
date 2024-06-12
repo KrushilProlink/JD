@@ -126,7 +126,6 @@ const RecruiterCallDetails: FC = () => {
                 </span>
                 <span className="">Back</span>
               </button>
-              {/* <span className="fs-6 text-gray-900 fw-bold">{`${data?.recruiter_name} (${data?.team})-${data?.device_id}`}</span> */}
             </div>
             <div className="" data-kt-user-table-toolbar="base">
               <button

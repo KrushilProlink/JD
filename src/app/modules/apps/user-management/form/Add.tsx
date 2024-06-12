@@ -18,6 +18,8 @@ import {
 } from "@mui/material";
 import { MyDropzone } from "./FileUload";
 import Form from "./Form";
+import { useNavigate } from "react-router";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
 const steps = ["Upload JD", "Form to fill the requirement"];
 
@@ -30,11 +32,10 @@ interface FormValues {
   // Add your form fields here
 }
 
-const Add: React.FC<AddProps> = (props) => {
-  const { open, handleClose } = props;
+const Add: React.FC = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set<number>());
-
+  const navigate = useNavigate();
   const isStepOptional = (step: number) => {
     return step === 1;
   };
@@ -104,115 +105,82 @@ const Add: React.FC<AddProps> = (props) => {
     },
   });
 
-  console.log(activeStep, "activeStep");
-
   return (
     <div>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="scroll-dialog-title"
-        aria-describedby="scroll-dialog-description"
-      >
-        <DialogTitle
-          id="scroll-dialog-title"
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <Typography variant="h6">Add New</Typography>
-          <Typography>
-            <ClearIcon onClick={handleClose} style={{ cursor: "pointer" }} />
-          </Typography>
-        </DialogTitle>
-        <DialogContent dividers>
-          <DialogContentText id="scroll-dialog-description" tabIndex={-1}>
-            <Box sx={{ width: "100%" }}>
-              <div>
-                <Stepper activeStep={activeStep}>
-                  {steps.map((label, index) => {
-                    const stepProps: { completed?: boolean } = {};
-                    const labelProps: {
-                      optional?: React.ReactNode;
-                    } = {};
-                    // if (isStepOptional(index)) {
-                    //   labelProps.optional = (
-                    //     <Typography variant="caption">Optional</Typography>
-                    //   );
-                    // }
-                    if (isStepSkipped(index)) {
-                      stepProps.completed = false;
-                    }
-                    return (
-                      <Step key={label} {...stepProps}>
-                        <StepLabel {...labelProps}>{label}</StepLabel>
-                      </Step>
-                    );
-                  })}
-                </Stepper>
-              </div>
-              {activeStep === steps.length ? (
-                <React.Fragment>
-                  <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-                    <Box sx={{ flex: "1 1 auto" }} />
-                    <Button onClick={handleReset}>Reset</Button>
-                  </Box>
-                </React.Fragment>
-              ) : (
-                <React.Fragment>
-                  <Box>
-                    {activeStep === 0 && (
-                      <div style={{ width: "600px" }}>
-                        <MyDropzone />
-                      </div>
-                    )}
-                  </Box>
-                  <Box>{activeStep === 1 && <Form />}</Box>
+      <div className="card-header border-0 pt-6">
+        <div>
+          <button
+            type="button"
+            className="btn btn-light-primary"
+            onClick={() => navigate(-1)}
+          >
+            <span>
+              <ChevronLeftIcon className="fs-1" />
+            </span>
+            <span className="">Back</span>
+          </button>
+        </div>
+      </div>
+      <div className="card-body py-3">
+        <Box sx={{ width: "100%" }}>
+          <Stepper activeStep={activeStep} className="py-5">
+            {steps.map((label, index) => {
+              const stepProps: { completed?: boolean } = {};
+              const labelProps: {
+                optional?: React.ReactNode;
+              } = {};
+              // if (isStepOptional(index)) {
+              //   labelProps.optional = (
+              //     <Typography variant="caption">Optional</Typography>
+              //   );
+              // }
+              if (isStepSkipped(index)) {
+                stepProps.completed = false;
+              }
+              return (
+                <Step key={label} {...stepProps}>
+                  <StepLabel {...labelProps}>{label}</StepLabel>
+                </Step>
+              );
+            })}
+          </Stepper>
+          {activeStep === steps.length ? (
+            <React.Fragment>
+              <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+                <Box sx={{ flex: "1 1 auto" }} />
+                <Button onClick={handleReset} variant="outlined">
+                  Back
+                </Button>
+              </Box>
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <Box>
+                {activeStep === 0 && (
+                  <MyDropzone handleChangeStep={() => setActiveStep(1)} />
+                )}
+              </Box>
+              <Box>{activeStep === 1 && <Form />}</Box>
 
-                  <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-                    {/* <Button
-                      color="inherit"
-                      disabled={activeStep === 0}
-                      onClick={handleBack}
-                      sx={{ mr: 1 }}
-                    >
-                      Back
-                    </Button> */}
-                    <Box sx={{ flex: "1 1 auto" }} />
-                    {/* <Button onClick={handleNext}>
-                      {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                    </Button> */}
-                  </Box>
-                </React.Fragment>
-              )}
-            </Box>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <div className="w-100 d-flex justify-content-between">
-            <Button
-              disabled={activeStep === 0}
-              onClick={handleBack}
-              sx={{ mr: 1 }}
-              variant="outlined"
-              color="primary"
-            >
-              Back
-            </Button>
-
-            {activeStep === steps.length - 1 ? (
-              <Button onClick={handleNext} variant="outlined" color="primary">
-                Finish
-              </Button>
-            ) : (
-              <Button onClick={handleNext} variant="outlined" color="primary">
-                Next
-              </Button>
-            )}
-          </div>
-        </DialogActions>
-      </Dialog>
+              <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+                <Button
+                  color="inherit"
+                  disabled={activeStep === 0}
+                  onClick={handleBack}
+                  sx={{ mr: 1 }}
+                  variant="outlined"
+                >
+                  Back
+                </Button>
+                <Box sx={{ flex: "1 1 auto" }} />
+                <Button onClick={handleNext} variant="outlined">
+                  {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                </Button>
+              </Box>
+            </React.Fragment>
+          )}
+        </Box>
+      </div>
     </div>
   );
 };

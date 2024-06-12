@@ -55,7 +55,7 @@ const RecruiterDetailsTable: FC = () => {
 
   return (
     <div>
-      <Add open={isOpen} handleClose={() => setIsOpen(false)} />
+      {/* <Add /> */}
       <div className="card-header border-0 pt-6">
         {/* <div className="card-title">
           <div className="d-flex align-items-center position-relative my-1">
@@ -138,7 +138,7 @@ const RecruiterDetailsTable: FC = () => {
         >
           <button
             className="btn btn-sm btn-light-primary"
-            onClick={() => setIsOpen(true)}
+            onClick={() => navigate("add")}
             // data-bs-toggle='modal'
             // data-bs-target='#kt_modal_invite_friends'
           >
