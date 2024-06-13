@@ -20,7 +20,7 @@ type CallData = {
 };
 
 const RecruiterDetailsTable: FC = () => {
-  const [allCallData, setAllCallData] = useState<CallData[]>([]);
+  // const [allCallData, setAllCallData] = useState<CallData[]>([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [isLoading, setIsLoading] = useState(false);
@@ -29,6 +29,19 @@ const RecruiterDetailsTable: FC = () => {
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
+
+  const allCallData = [
+    {
+      serial_no: 1,
+      recruiter_name: "john",
+      team: "sele",
+      device_id: 7,
+      no_of_calls: 3,
+      total_call_duration: 30,
+      overall_score: 10,
+    },
+  ];
+
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -36,22 +49,22 @@ const RecruiterDetailsTable: FC = () => {
     setPage(0);
   };
 
-  const fetchAllCallData = async () => {
-    setIsLoading(true);
-    try {
-      const response = await axios.get(`${API_URL}/all-call-data`);
-      if (response?.status === 200) {
-        setAllCallData(response?.data?.data);
-      }
-    } catch (error) {
-      console.error("Error fetching call data:", error);
-    }
-    setIsLoading(false);
-  };
+  // const fetchAllCallData = async () => {
+  //   setIsLoading(true);
+  //   try {
+  //     const response = await axios.get(`${API_URL}/all-call-data`);
+  //     if (response?.status === 200) {
+  //       setAllCallData(response?.data?.data);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching call data:", error);
+  //   }
+  //   setIsLoading(false);
+  // };
 
-  useEffect(() => {
-    fetchAllCallData();
-  }, []);
+  // useEffect(() => {
+  //   fetchAllCallData();
+  // }, []);
 
   return (
     <div>
