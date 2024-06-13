@@ -205,8 +205,8 @@ const chartOptions = (chartColor: string, chartHeight: string): ApexOptions => {
         fontSize: "12px",
       },
       y: {
-        formatter: function (val) {
-          return val;
+        formatter: function (val: any) {
+          return val.toString();
         },
       },
     },

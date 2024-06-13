@@ -124,11 +124,12 @@ const RecruiterDetailsTable: FC = () => {
       </div>
       {/* begin::Header */}
       <div className="card-header border-0 pt-5">
-        <h3 className="card-title align-items-start flex-column">
+        {/* <h3 className="card-title align-items-start flex-column">
           <span className="card-label fw-bold fs-3 mb-1">
-            Recruiter Details
+          Requirement Details
           </span>
-        </h3>
+        </h3> */}
+        <div></div>
         <div
           className="card-toolbar"
           data-bs-toggle="tooltip"
@@ -169,7 +170,8 @@ const RecruiterDetailsTable: FC = () => {
             {/* end::Table head */}
             {/* begin::Table body */}
             <tbody>
-              {!isLoading && allCallData?.length > 0 ? (
+              {!isLoading ? (
+                allCallData?.length > 0 &&
                 allCallData
                   ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   ?.map((item: any, index: number) => (
@@ -240,11 +242,7 @@ const RecruiterDetailsTable: FC = () => {
                         >
                           <KeyboardArrowRightIcon
                             style={{ cursor: "pointer" }}
-                            onClick={() =>
-                              navigate(`${item?.device_id}`, {
-                                state: { data: item },
-                              })
-                            }
+                            onClick={() => navigate(`candidatesDetails/1}`)}
                           />
                         </span>
                       </td>
@@ -276,7 +274,7 @@ const RecruiterDetailsTable: FC = () => {
                   </td>
                 </tr>
               )}
-              {allCallData?.length === 0 && isLoading && (
+              {allCallData?.length === 0 && !isLoading && (
                 <tr>
                   <td
                     colSpan={10}
@@ -289,7 +287,7 @@ const RecruiterDetailsTable: FC = () => {
             </tbody>
             {/* end::Table body */}
           </table>
-          {allCallData?.length > 0 && isLoading && (
+          {allCallData?.length > 0 && !isLoading && (
             <TablePagination
               rowsPerPageOptions={[5, 25, 100]}
               component="div"

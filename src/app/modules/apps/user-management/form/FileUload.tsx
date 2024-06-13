@@ -12,28 +12,12 @@ interface MyDropzoneProps {
   handleChangeStep: () => void;
 }
 
-const dropzoneStyle = {
-  backgroundColor: "#ffffff0d",
-  backgroundImage: ` url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='10' ry='10' stroke='%238E98A3FF' stroke-width='2' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e")`,
-  borderRadius: "10px",
-  padding: "20px",
-  boxShadow: "rgb(0 0 0 / 12%) 0px 0px 32px -13px",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  flexDirection: "column",
-  height: "60vh",
-  textAlign: "center",
-  marginTop: "8px",
-  margin: "5px",
-};
-
 const MyDropzone: React.FC<MyDropzoneProps> = (props) => {
   const { handleChangeStep } = props;
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [view, setView] = useState(false);
-  const [file, setFile] = useState<File[] | null>(null);
+  const [file, setFile] = useState<File[]>([]);
   const navigate = useNavigate();
 
   const getFileExtension = (filename: string): string => {
@@ -96,7 +80,7 @@ const MyDropzone: React.FC<MyDropzoneProps> = (props) => {
     <>
       {file?.length > 0 ? (
         <>
-          <div style={dropzoneStyle}>
+          <div className="dropzoneStyle">
             {/* <CiFileOn className='display-1' style={{ color: "#92AFF8" }} /> */}
             <img
               src={fileImage}
@@ -125,35 +109,26 @@ const MyDropzone: React.FC<MyDropzoneProps> = (props) => {
                   <Button
                     variant="contained"
                     onClick={() => handleRedirect()}
-                    className="Manrope"
+                    className="btn btn-sm btn-light-primary fs-6 text-capitalize"
                     style={{
-                      backgroundColor: "#1B84FF",
                       marginTop: "30px",
                       marginBottom: "10px",
-                      fontSize: "16px",
-                      fontWeight: "600",
-                      padding: "8px 45px",
-                      color: "#fff",
-                      boxShadow: "none",
+                      padding: "8px 40px",
                     }}
                   >
-                    Start
+                    Upload
                   </Button>
                 ) : (
                   <Button
                     variant="contained"
-                    startIcon={<FaCheck />}
+                    startIcon={<FaCheck className="fs-6" />}
                     onClick={() => handleChangeStep()}
-                    className="Manrope"
+                    className="btn btn-sm btn-light-primary fs-6 text-capitalize"
                     style={{
                       boxShadow: "none",
-                      backgroundColor: "#1B84FF",
                       marginTop: "30px",
-                      fontSize: "14px",
                       marginBottom: "8px",
-                      fontWeight: "600",
                       padding: "8px 16px",
-                      color: "#fff",
                     }}
                   >
                     View Results
@@ -168,12 +143,9 @@ const MyDropzone: React.FC<MyDropzoneProps> = (props) => {
                 </div>
               )}
             </div>
-            {/* <div className='mt-5'>
-                                <Button variant='contained' startIcon={<FaCheck />} onClick={() => navigate('/dashboard/executive-reports')}> View Result</Button>
-                            </div> */}
             <Typography
               variant="caption"
-              onClick={() => setFile(null)}
+              onClick={() => setFile([])}
               style={{
                 cursor: "pointer",
                 color: "#222E93",
@@ -188,7 +160,7 @@ const MyDropzone: React.FC<MyDropzoneProps> = (props) => {
         </>
       ) : (
         <>
-          <div {...getRootProps()} style={dropzoneStyle}>
+          <div {...getRootProps()} className="dropzoneStyle">
             {/* <FaCloudUploadAlt className='display-1 text-primary' /> */}
             <img
               src={cloud}
@@ -202,7 +174,7 @@ const MyDropzone: React.FC<MyDropzoneProps> = (props) => {
               style={{ fontWeight: "bold", fontSize: "18px" }}
               className="Manrope"
             >
-              Upload Today's Schedule
+              Upload JD
             </Typography>
             <Typography
               style={{ color: "#10253F", fontSize: "14px", opacity: "50%" }}
@@ -234,18 +206,8 @@ const MyDropzone: React.FC<MyDropzoneProps> = (props) => {
               </Typography>
               <Button
                 variant="contained"
-                className="Manrope"
-                style={{
-                  backgroundColor: "#1B84FF",
-                  marginTop: "12px",
-                  fontSize: "14px",
-                  fontWeight: "600",
-                  padding: "8px 16px",
-                  color: "#fff",
-                  boxShadow: "none",
-                }}
+                className="btn btn-sm btn-light-primary fs-6 text-capitalize"
               >
-                {" "}
                 Select File
               </Button>
             </div>

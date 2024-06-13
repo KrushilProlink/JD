@@ -1,12 +1,9 @@
 import { Route, Routes, Outlet, Navigate } from "react-router-dom";
 import { PageLink, PageTitle } from "../../../../_metronic/layout/core";
 import { RecruiterListWrapper } from "./users-list/RecruiterList";
-import { RecruiterCallListWrapper } from "./users-list/RecruiterCalList";
+import { CandidatesListWrapper } from "./users-list/CandidatesList";
 import Add from "./form/Add";
 import { KTCard } from "../../../../_metronic/helpers";
-import { QueryRequestProvider } from "./users-list/core/QueryRequestProvider";
-import { QueryResponseProvider } from "./users-list/core/QueryResponseProvider";
-import { ListViewProvider } from "./users-list/core/ListViewProvider";
 
 const RecruiterDetailsPage = () => {
   return (
@@ -16,7 +13,7 @@ const RecruiterDetailsPage = () => {
           path="recruiter"
           element={
             <>
-              <PageTitle>Recruiter Details</PageTitle>
+              <PageTitle>Requirement Details</PageTitle>
               <RecruiterListWrapper />
             </>
           }
@@ -26,15 +23,18 @@ const RecruiterDetailsPage = () => {
           element={
             <>
               <PageTitle>Add New</PageTitle>
-              <QueryRequestProvider>
-                <QueryResponseProvider>
-                  <ListViewProvider>
-                    <KTCard>
-                      <Add />
-                    </KTCard>
-                  </ListViewProvider>
-                </QueryResponseProvider>
-              </QueryRequestProvider>
+              <KTCard>
+                <Add />
+              </KTCard>
+            </>
+          }
+        />
+        <Route
+          path="recruiter/candidatesDetails/:id"
+          element={
+            <>
+              <PageTitle>Candidates Details</PageTitle>
+              <CandidatesListWrapper />
             </>
           }
         />

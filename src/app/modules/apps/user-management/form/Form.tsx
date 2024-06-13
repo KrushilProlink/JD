@@ -22,7 +22,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Typography from "@mui/material/Typography";
 import ClearIcon from "@mui/icons-material/Clear";
-import { useFormik } from "formik";
+import { FormikHelpers, useFormik } from "formik";
 import * as yup from "yup";
 
 interface AddProps {
@@ -95,60 +95,13 @@ const Form: React.FC = () => {
   return (
     <div>
       <form style={{ marginTop: "50px" }}>
-        <Grid container rowSpacing={3} columnSpacing={{ xs: 0, sm: 5, md: 4 }}>
-          <Grid item xs={12} sm={4} md={4}>
-            <FormLabel>Role</FormLabel>
-            <TextField
-              id="role"
-              name="role"
-              label=""
-              size="small"
-              maxRows={10}
-              fullWidth
-              //   value={formik.values.firstName}
-              //   onChange={formik.handleChange}
-              //   error={
-              //     formik.touched.firstName && Boolean(formik.errors.firstName)
-              //   }
-              //   helperText={formik.touched.firstName && formik.errors.firstName}
-            />
-          </Grid>
-          <Grid item xs={12} sm={4} md={4}>
-            <FormLabel>Minimum Experience</FormLabel>
-            <TextField
-              id="minimumExperience"
-              name="minimumExperience"
-              label=""
-              size="small"
-              fullWidth
-              //   value={formik.values.lastName}
-              //   onChange={formik.handleChange}
-              //   error={formik.touched.lastName && Boolean(formik.errors.lastName)}
-              //   helperText={formik.touched.lastName && formik.errors.lastName}
-            />
-          </Grid>
-          <Grid item xs={12} sm={4} md={4}>
-            <FormLabel>Maximum Experience</FormLabel>
-            <TextField
-              id="maximumExperience"
-              name="maximumExperience"
-              label=""
-              size="small"
-              fullWidth
-              //   value={formik.values.lastName}
-              //   onChange={formik.handleChange}
-              //   error={formik.touched.lastName && Boolean(formik.errors.lastName)}
-              //   helperText={formik.touched.lastName && formik.errors.lastName}
-            />
-          </Grid>
-        </Grid>
         <Typography
           style={{ marginBottom: "15px", marginTop: "15px" }}
           variant="h6"
         >
           Job Location
         </Typography>
-        <Grid container rowSpacing={3} columnSpacing={{ xs: 0, sm: 5, md: 4 }}>
+        {/* <Grid container rowSpacing={3} columnSpacing={{ xs: 0, sm: 5, md: 4 }}>
           <Grid item xs={12} sm={4} md={4}>
             <FormLabel>City</FormLabel>
             <TextField
@@ -194,7 +147,7 @@ const Form: React.FC = () => {
               //   helperText={formik.touched.lastName && formik.errors.lastName}
             />
           </Grid>
-        </Grid>
+        </Grid> */}
         <Grid
           container
           rowSpacing={3}
