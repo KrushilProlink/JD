@@ -6,7 +6,9 @@ import DownloadIcon from "@mui/icons-material/Download";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ViewCandidate from "../../form/ViewCandidate";
 const API_URL = import.meta.env.VITE_APP_API_URL;
 
 type RecruiterCall = {
@@ -50,14 +52,11 @@ const CandidatesDetailsTable: FC = () => {
     setPage(newPage);
   };
 
-  const candidateData = [
+  const candidateList = [
     {
-      serial_no: 1,
-      candidate_name: "John",
-      email_id: "john@gmail.com",
-      contact_number: "0123456789",
-      source: "test",
-      jd_vs_cv_score: 20,
+      candidateId: "200",
+      name: "Jane Doe",
+      email: "jane.doe@example.com",
       status: "active",
     },
   ];
@@ -108,7 +107,7 @@ const CandidatesDetailsTable: FC = () => {
 
   return (
     <>
-      {/* <UsersListHeader /> */}
+      <ViewCandidate open={isOpen} handleClose={() => setIsOpen(false)} />
       <div className="card-header border-0 pt-6">
         {/* <div className="card-title">
           <div className="d-flex align-items-center position-relative my-1">
@@ -229,15 +228,15 @@ const CandidatesDetailsTable: FC = () => {
                   <th className="text-center">Source</th>
                   <th className="text-center">JD vs CV score</th>
                   <th className="text-center">Status</th>
-                  <th className="text-end pe-4">Actions</th>
+                  <th className="text-center ">Actions</th>
                 </tr>
               </thead>
               {/* end::Table head */}
               {/* begin::Table body */}
               <tbody>
                 {!isLoading ? (
-                  candidateData?.length > 0 &&
-                  candidateData
+                  candidateList?.length > 0 &&
+                  candidateList
                     ?.slice(
                       page * rowsPerPage,
                       page * rowsPerPage + rowsPerPage
@@ -245,33 +244,63 @@ const CandidatesDetailsTable: FC = () => {
                     ?.map((item, index) => (
                       <tr>
                         <td className=" text-gray-900 fw-bold text-hover-primary fs-6 text-center">
-                          {item?.serial_no || "-"}
+                          {"-"}
                         </td>
                         <td className="text-gray-900 fw-bold text-hover-primary fs-6 text-center">
-                          {item?.candidate_name || "-"}
+                          {item?.name || "-"}
                         </td>
                         <td className="text-gray-900 fw-bold text-hover-primary fs-6 text-center">
-                          {item?.email_id || "-"}
+                          {item?.email || "-"}
                         </td>
                         <td className="text-gray-900 fw-bold text-hover-primary fs-6 text-center">
-                          {item?.contact_number || "-"}
+                          {"-"}
                         </td>
                         <td className="text-gray-900 fw-bold text-hover-primary fs-6 text-center">
-                          {item?.source || "-"}
+                          {"-"}
                         </td>
                         <td className="text-gray-900 fw-bold text-hover-primary fs-6 text-center">
-                          {item?.jd_vs_cv_score || "-"}
+                          {"-"}
                         </td>
                         <td className="text-gray-900 fw-bold text-hover-primary fs-6 text-center">
                           {item?.status || "-"}
                         </td>
 
-                        <td className="text-gray-900 fw-bold text-hover-primary pe-4">
+                        <td className="text-gray-900 fw-bold text-hover-primary fs-6  text-center">
                           <span
-                            className="flex-shrink-0 btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm"
-                            style={{ float: "right" }}
+                            className=" btn btn-bg-secondary btn-color-muted btn-active-color-primary btn-sm p-2"
+                            onClick={() => setIsOpen(true)}
                           >
-                            <VisibilityIcon style={{ cursor: "pointer" }} />
+                            <div
+                              className="card-toolbar"
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              data-bs-trigger="hover"
+                              title="View Details"
+                            >
+                              <VisibilityIcon style={{ cursor: "pointer" }} />
+                            </div>
+                          </span>
+                          <span className="flex-shrink-0 btn btn-bg-secondary btn-color-muted btn-active-color-primary btn-sm p-2 ms-2">
+                            <div
+                              className="card-toolbar"
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              data-bs-trigger="hover"
+                              title="Edit Details"
+                            >
+                              <EditIcon style={{ cursor: "pointer" }} />
+                            </div>
+                          </span>
+                          <span className="flex-shrink-0 btn btn-bg-secondary btn-color-muted btn-active-color-primary btn-sm p-2 ms-2">
+                            <div
+                              className="card-toolbar"
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              data-bs-trigger="hover"
+                              title="Delete"
+                            >
+                              <DeleteIcon style={{ cursor: "pointer" }} />
+                            </div>
                           </span>
                         </td>
                       </tr>
@@ -302,7 +331,7 @@ const CandidatesDetailsTable: FC = () => {
                     </td>
                   </tr>
                 )}
-                {!isLoading && candidateData?.length === 0 && (
+                {!isLoading && candidateList?.length === 0 && (
                   <tr>
                     <td
                       colSpan={10}
@@ -316,11 +345,11 @@ const CandidatesDetailsTable: FC = () => {
               {/* end::Table body */}
             </table>
 
-            {candidateData?.length > 0 && !isLoading && (
+            {candidateList?.length > 0 && !isLoading && (
               <TablePagination
                 rowsPerPageOptions={[5, 25, 100]}
                 component="div"
-                count={candidateData.length}
+                count={candidateList.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}

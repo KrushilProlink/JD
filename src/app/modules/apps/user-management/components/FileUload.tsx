@@ -3,7 +3,7 @@ import { useDropzone } from "react-dropzone";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Button, Typography } from "@mui/material";
-import CircleLoader from "../components/CircleLoader"; // Update the path as needed
+import CircleLoader from "./CircleLoader"; // Update the path as needed
 import { FaCheck, FaFileImage } from "react-icons/fa";
 import cloud from "../../../../../_metronic/assets/images/Subtract.png";
 import fileImage from "../../../../../_metronic/assets/images/file.png";

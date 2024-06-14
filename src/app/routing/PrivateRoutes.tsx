@@ -76,7 +76,7 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-          path="apps/recruiter-Details/*"
+          path="apps/requirement-Details/*"
           element={
             <SuspensedView>
               <CallPage />

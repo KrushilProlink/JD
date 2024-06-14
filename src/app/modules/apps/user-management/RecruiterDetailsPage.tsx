@@ -10,16 +10,16 @@ const RecruiterDetailsPage = () => {
     <Routes>
       <Route element={<Outlet />}>
         <Route
-          path="recruiter"
+          path="requirement"
           element={
             <>
-              <PageTitle>Requirement Details</PageTitle>
+              <PageTitle>Requirement</PageTitle>
               <RecruiterListWrapper />
             </>
           }
         />
         <Route
-          path="recruiter/add"
+          path="requirement/add"
           element={
             <>
               <PageTitle>Add New</PageTitle>
@@ -30,7 +30,7 @@ const RecruiterDetailsPage = () => {
           }
         />
         <Route
-          path="recruiter/candidatesDetails/:id"
+          path="requirement/candidatesDetails/:id"
           element={
             <>
               <PageTitle>Candidates Details</PageTitle>
@@ -41,7 +41,7 @@ const RecruiterDetailsPage = () => {
       </Route>
       <Route
         index
-        element={<Navigate to="/apps/recruiter-Details/recruiter" />}
+        element={<Navigate to="/apps/requirement-Details/requirement" />}
       />
     </Routes>
   );

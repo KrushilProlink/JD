@@ -106,10 +106,10 @@ export function AsideMenuMain() {
       {/* <AsideMenuItem to='/apps/user-management/users' icon='shield-tick' title='Call Analysis' /> */}
 
       <AsideMenuItem
-        to="/apps/recruiter-Details/recruiter"
+        to="/apps/requirement-Details/requirement"
         // icon="shield-tick"
         icon={<IoIosCall />}
-        title="Recruiter"
+        title="Requirement"
       />
       {/* <div className='menu-item'>
         <div className='menu-content'>

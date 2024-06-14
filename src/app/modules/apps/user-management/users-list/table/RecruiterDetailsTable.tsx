@@ -7,7 +7,11 @@ import { useNavigate } from "react-router-dom";
 import { KTIcon, toAbsoluteUrl } from "../../../../../../_metronic/helpers";
 import Add from "../../form/Add";
 // import FileUploadIcon from "@mui/icons-material/FileUpload";
-
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import PersonIcon from "@mui/icons-material/Person";
+import ViewJd from "../../form/ViewJd";
 const API_URL = import.meta.env.VITE_APP_API_URL;
 
 type CallData = {
@@ -31,15 +35,12 @@ const RecruiterDetailsTable: FC = () => {
     setPage(newPage);
   };
 
-  const allCallData = [
+  const jdList = [
     {
-      serial_no: 1,
-      recruiter_name: "john",
-      team: "sele",
-      device_id: 7,
-      no_of_calls: 3,
-      total_call_duration: 30,
-      overall_score: 10,
+      jdId: 10,
+      title: "Software Engineer",
+      date: "2024-06-12",
+      status: "active",
     },
   ];
 
@@ -69,7 +70,7 @@ const RecruiterDetailsTable: FC = () => {
 
   return (
     <div>
-      {/* <Add /> */}
+      <ViewJd open={isOpen} handleClose={() => setIsOpen(false)} />
       <div className="card-header border-0 pt-6">
         {/* <div className="card-title">
           <div className="d-flex align-items-center position-relative my-1">
@@ -149,7 +150,7 @@ const RecruiterDetailsTable: FC = () => {
           data-bs-toggle="tooltip"
           data-bs-placement="top"
           data-bs-trigger="hover"
-          title="Click to add a user"
+          // title="Click to add a user"
         >
           <button
             className="btn btn-sm btn-light-primary"
@@ -173,92 +174,85 @@ const RecruiterDetailsTable: FC = () => {
             {/* begin::Table head */}
             <thead>
               <tr className="fw-bold text-muted bg-light">
-                <th className="text-center">Serial No</th>
-                <th className="">Recruiter Name</th>
-                <th className=" text-center">No of Calls</th>
-                <th className=" text-center">Total Call Duration</th>
-                <th className="">Overall Score</th>
-                <th className="">Rating</th>
-                <th className="text-end pe-4">Actions</th>
+                <th className="text-center">JD ID</th>
+                <th className="text-center">Title</th>
+                <th className=" text-center">Date</th>
+                <th className=" text-center">Status</th>
+                <th className="text-center pe-4">Actions</th>
               </tr>
             </thead>
             {/* end::Table head */}
             {/* begin::Table body */}
             <tbody>
               {!isLoading ? (
-                allCallData?.length > 0 &&
-                allCallData
+                jdList?.length > 0 &&
+                jdList
                   ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   ?.map((item: any, index: number) => (
                     <tr>
                       <td className="text-gray-900 fw-bold text-hover-primary fs-6  text-center">
-                        {item?.serial_no || "-"}
-                      </td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          <div className="symbol symbol-45px me-5">
-                            <span className="symbol-label bg-light">
-                              <img
-                                src={toAbsoluteUrl(
-                                  "media/svg/avatars/001-boy.svg"
-                                )}
-                                className="h-75 align-self-end"
-                                alt=""
-                              />
-                            </span>
-                          </div>
-                          <div className="d-flex justify-content-start flex-column">
-                            <a
-                              href="#"
-                              className="text-gray-900 fw-bold text-hover-primary fs-6"
-                            >
-                              {item?.recruiter_name || "-"}
-                            </a>
-                            <span className="text-muted fw-semibold text-muted d-block fs-7">
-                              {item?.team} - {item?.device_id}
-                            </span>
-                          </div>
-                        </div>
+                        {item?.jdId || "-"}
                       </td>
                       <td className="text-gray-900 fw-bold text-hover-primary fs-6 text-center">
-                        {item?.no_of_calls || "-"}
+                        {item?.title || "-"}
                       </td>
                       <td className="text-gray-900 fw-bold text-hover-primary fs-6 text-center">
-                        {item?.total_call_duration || "-"}
+                        {item?.date || "-"}
                       </td>
-                      <td className="text-end">
-                        <div className="d-flex flex-column w-100 me-2">
-                          <div className="d-flex flex-stack mb-2">
-                            <span className="text-muted me-2 fs-7 fw-semibold">
-                              {item?.overall_score}%
-                            </span>
-                          </div>
-                          <div className="progress h-6px w-100">
-                            <div
-                              className="progress-bar bg-primary"
-                              role="progressbar"
-                              style={{ width: `${item?.overall_score}%` }}
-                            ></div>
-                          </div>
-                        </div>
+                      <td className="text-gray-900 fw-bold text-hover-primary fs-6 text-center">
+                        {item?.status || "-"}
                       </td>
-                      <td>
-                        <div className="rating">
-                          <Rating name="read-only" value={5} readOnly />
-                        </div>
-                        <span className="text-muted fw-semibold text-muted d-block fs-7 mt-1 ms-1">
-                          Best Rated
-                        </span>
-                      </td>
-                      <td className="text-gray-900 fw-bold text-hover-primary fs-6 pe-4">
+
+                      <td className="text-gray-900 fw-bold text-hover-primary fs-6  text-center">
                         <span
-                          className="flex-shrink-0 btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm "
-                          style={{ float: "right" }}
+                          className=" btn btn-bg-secondary btn-color-muted btn-active-color-primary btn-sm p-2"
+                          onClick={() => setIsOpen(true)}
                         >
-                          <KeyboardArrowRightIcon
-                            style={{ cursor: "pointer" }}
-                            onClick={() => navigate(`candidatesDetails/1}`)}
-                          />
+                          <div
+                            className="card-toolbar"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            data-bs-trigger="hover"
+                            title="View Details"
+                          >
+                            <VisibilityIcon style={{ cursor: "pointer" }} />
+                          </div>
+                        </span>
+                        <span className="flex-shrink-0 btn btn-bg-secondary btn-color-muted btn-active-color-primary btn-sm p-2 ms-2">
+                          <div
+                            className="card-toolbar"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            data-bs-trigger="hover"
+                            title="Edit Details"
+                          >
+                            <EditIcon style={{ cursor: "pointer" }} />
+                          </div>
+                        </span>
+                        <span className="flex-shrink-0 btn btn-bg-secondary btn-color-muted btn-active-color-primary btn-sm p-2 ms-2">
+                          <div
+                            className="card-toolbar"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            data-bs-trigger="hover"
+                            title="Delete"
+                          >
+                            <DeleteIcon style={{ cursor: "pointer" }} />
+                          </div>
+                        </span>
+                        <span className="flex-shrink-0 btn btn-bg-secondary btn-color-muted btn-active-color-primary btn-sm p-2 ms-2">
+                          <div
+                            className="card-toolbar"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            data-bs-trigger="hover"
+                            title="Candidate Details"
+                          >
+                            <PersonIcon
+                              style={{ cursor: "pointer" }}
+                              onClick={() => navigate(`candidatesDetails/1}`)}
+                            />
+                          </div>
                         </span>
                       </td>
                     </tr>
@@ -289,7 +283,7 @@ const RecruiterDetailsTable: FC = () => {
                   </td>
                 </tr>
               )}
-              {allCallData?.length === 0 && !isLoading && (
+              {jdList?.length === 0 && !isLoading && (
                 <tr>
                   <td
                     colSpan={10}
@@ -302,11 +296,11 @@ const RecruiterDetailsTable: FC = () => {
             </tbody>
             {/* end::Table body */}
           </table>
-          {allCallData?.length > 0 && !isLoading && (
+          {jdList?.length > 0 && !isLoading && (
             <TablePagination
               rowsPerPageOptions={[5, 25, 100]}
               component="div"
-              count={allCallData.length}
+              count={jdList.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}
