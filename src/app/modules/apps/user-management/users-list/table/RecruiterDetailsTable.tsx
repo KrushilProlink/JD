@@ -6,6 +6,7 @@ import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { KTIcon, toAbsoluteUrl } from "../../../../../../_metronic/helpers";
 import Add from "../../form/Add";
+// import FileUploadIcon from "@mui/icons-material/FileUpload";
 
 const API_URL = import.meta.env.VITE_APP_API_URL;
 
@@ -157,6 +158,7 @@ const RecruiterDetailsTable: FC = () => {
             // data-bs-target='#kt_modal_invite_friends'
           >
             <KTIcon iconName="plus" className="fs-3" />
+            <span>{/* <FileUploadIcon /> */}</span>
             Add New
           </button>
         </div>

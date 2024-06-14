@@ -10,10 +10,11 @@ import fileImage from "../../../../../_metronic/assets/images/file.png";
 
 interface MyDropzoneProps {
   handleChangeStep: () => void;
+  title: String;
 }
 
 const MyDropzone: React.FC<MyDropzoneProps> = (props) => {
-  const { handleChangeStep } = props;
+  const { handleChangeStep, title } = props;
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [view, setView] = useState(false);
@@ -174,7 +175,7 @@ const MyDropzone: React.FC<MyDropzoneProps> = (props) => {
               style={{ fontWeight: "bold", fontSize: "18px" }}
               className="Manrope"
             >
-              Upload JD
+              {title}
             </Typography>
             <Typography
               style={{ color: "#10253F", fontSize: "14px", opacity: "50%" }}

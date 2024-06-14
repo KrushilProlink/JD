@@ -195,6 +195,22 @@ const CandidatesDetailsTable: FC = () => {
               Candidate Details
             </span>
           </h3>
+          <div
+            className="card-toolbar"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-trigger="hover"
+            title="Click to add a user"
+          >
+            <button
+              className="btn btn-sm btn-light-primary"
+              // data-bs-toggle='modal'
+              // data-bs-target='#kt_modal_invite_friends'
+            >
+              <KTIcon iconName="plus" className="fs-3" />
+              Add New
+            </button>
+          </div>
         </div>
         {/* end::Header */}
         {/* begin::Body */}
