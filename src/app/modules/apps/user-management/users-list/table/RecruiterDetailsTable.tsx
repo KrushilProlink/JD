@@ -27,7 +27,7 @@ type CallData = {
 const RecruiterDetailsTable: FC = () => {
   // const [allCallData, setAllCallData] = useState<CallData[]>([]);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -203,7 +203,7 @@ const RecruiterDetailsTable: FC = () => {
                         {item?.status || "-"}
                       </td>
 
-                      <td className="text-gray-900 fw-bold text-hover-primary fs-6  text-center">
+                      <td className="text-gray-900 fw-bold text-hover-primary fs-6  text-center d-flex flex-nowrap justify-content-center">
                         <span
                           className=" btn btn-bg-secondary btn-color-muted btn-active-color-primary btn-sm p-2"
                           onClick={() => setIsOpen(true)}
@@ -250,7 +250,9 @@ const RecruiterDetailsTable: FC = () => {
                           >
                             <PersonIcon
                               style={{ cursor: "pointer" }}
-                              onClick={() => navigate(`candidatesDetails/1}`)}
+                              onClick={() =>
+                                navigate(`candidatesDetails/${item?.jdId}`)
+                              }
                             />
                           </div>
                         </span>
@@ -296,9 +298,9 @@ const RecruiterDetailsTable: FC = () => {
             </tbody>
             {/* end::Table body */}
           </table>
-          {jdList?.length > 0 && !isLoading && (
+          {jdList?.length > 10 && !isLoading && (
             <TablePagination
-              rowsPerPageOptions={[5, 25, 100]}
+              rowsPerPageOptions={[10, 25, 100]}
               component="div"
               count={jdList.length}
               rowsPerPage={rowsPerPage}

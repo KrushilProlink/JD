@@ -3,6 +3,8 @@ import {
   FormLabel,
   Grid,
   IconButton,
+  MenuItem,
+  Select,
   TextField,
 } from "@mui/material";
 import * as React from "react";
@@ -14,11 +16,12 @@ interface Props {
 
 const CertificationDetails: React.FC<Props> = (props) => {
   const { formik } = props;
+  console.log("formik", formik);
 
   const handleAddCertification = () => {
     formik.setFieldValue("certifications", [
       ...formik?.values?.certifications,
-      { certificationName: "", certificationVendor: "" },
+      { name: "", issueDate: "", expirationDate: "", issuedBy: "" },
     ]);
   };
 
@@ -48,8 +51,6 @@ const CertificationDetails: React.FC<Props> = (props) => {
     formik.setFieldValue("certifications", newCertifications);
   };
 
-  console.log(formik?.values, "formik?.values?.certifications");
-
   return (
     <div className="mt-5 pt-4 mx-5 px-5" style={{ height: "44vh" }}>
       <Grid
@@ -61,23 +62,47 @@ const CertificationDetails: React.FC<Props> = (props) => {
         {formik?.values?.certifications?.map(
           (certification: any, index: number) => (
             <React.Fragment key={index}>
-              <Grid item xs={12} sm={5} md={5.1}>
-                <FormLabel className="fw-bold">Certification Name</FormLabel>
+              <Grid item xs={12} sm={5} md={2.5}>
+                <FormLabel className="fw-bold">Name</FormLabel>
                 <TextField
-                  id={`certificationName-${index}`}
-                  name="certificationName"
-                  value={certification?.certificationName}
+                  id={`name-${index}`}
+                  name="name"
+                  value={certification?.name}
                   onChange={(event: any) => handleChange(index, event)}
                   size="small"
                   fullWidth
                 />
               </Grid>
-              <Grid item xs={12} sm={5} md={5.1}>
-                <FormLabel className="fw-bold">Certification Vendor</FormLabel>
+              <Grid item xs={12} sm={2.5} md={2.5}>
+                <FormLabel className="fw-bold">Issue Date</FormLabel>
                 <TextField
-                  id={`certificationVendor-${index}`}
-                  name="certificationVendor"
-                  value={certification?.certificationVendor}
+                  id={`issueDate-${index}`}
+                  name="issueDate"
+                  value={certification?.issueDate}
+                  onChange={(event: any) => handleChange(index, event)}
+                  size="small"
+                  type="date"
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} sm={2.5} md={2.5}>
+                <FormLabel className="fw-bold">Expiration Date</FormLabel>
+                <TextField
+                  id={`expirationDate-${index}`}
+                  name="expirationDate"
+                  value={certification?.expirationDate}
+                  onChange={(event: any) => handleChange(index, event)}
+                  size="small"
+                  type="date"
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} sm={2.5} md={2.5}>
+                <FormLabel className="fw-bold">Issued By</FormLabel>
+                <TextField
+                  id={`issuedBy-${index}`}
+                  name="issuedBy"
+                  value={certification?.issuedBy}
                   onChange={(event: any) => handleChange(index, event)}
                   size="small"
                   fullWidth
@@ -87,7 +112,7 @@ const CertificationDetails: React.FC<Props> = (props) => {
                 item
                 xs={12}
                 sm={2}
-                md={1.5}
+                md={2}
                 display={"flex"}
                 justifyContent={"center"}
               >

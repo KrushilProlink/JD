@@ -3,6 +3,7 @@ import { PageLink, PageTitle } from "../../../../_metronic/layout/core";
 import { RecruiterListWrapper } from "./users-list/RecruiterList";
 import { CandidatesListWrapper } from "./users-list/CandidatesList";
 import Add from "./form/Add";
+import AddCandidate from "./form/AddCandidate";
 import { KTCard } from "../../../../_metronic/helpers";
 
 const RecruiterDetailsPage = () => {
@@ -23,9 +24,16 @@ const RecruiterDetailsPage = () => {
           element={
             <>
               <PageTitle>Add New</PageTitle>
-              {/* <KTCard> */}
-                <Add />
-              {/* </KTCard> */}
+              <Add />
+            </>
+          }
+        />
+        <Route
+          path="requirement/candidatesDetails/:id/add"
+          element={
+            <>
+              <PageTitle>Add New</PageTitle>
+              <AddCandidate />
             </>
           }
         />

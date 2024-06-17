@@ -4,10 +4,16 @@ import { AsideMenuItemWithSub } from "./AsideMenuItemWithSub";
 import { AsideMenuItem } from "./AsideMenuItem";
 import { MdDashboard } from "react-icons/md";
 import { IoIosCall } from "react-icons/io";
-
+interface UserDetails {
+  token: string;
+  userRole: string;
+  userId: string;
+}
 export function AsideMenuMain() {
   const intl = useIntl();
-
+  const userDetails: UserDetails | null = JSON.parse(
+    localStorage.getItem("userDetails") || "null"
+  );
   return (
     <>
       <AsideMenuItem
@@ -105,12 +111,14 @@ export function AsideMenuMain() {
 
       {/* <AsideMenuItem to='/apps/user-management/users' icon='shield-tick' title='Call Analysis' /> */}
 
-      <AsideMenuItem
-        to="/apps/requirement-Details/requirement"
-        // icon="shield-tick"
-        icon={<IoIosCall />}
-        title="Requirement"
-      />
+      {userDetails?.userRole === "recruiter" && (
+        <AsideMenuItem
+          to="/apps/requirement-Details/requirement"
+          // icon="shield-tick"
+          icon={<IoIosCall />}
+          title="Requirement"
+        />
+      )}
       {/* <div className='menu-item'>
         <div className='menu-content'>
           <div className='separator mx-1 my-4'></div>

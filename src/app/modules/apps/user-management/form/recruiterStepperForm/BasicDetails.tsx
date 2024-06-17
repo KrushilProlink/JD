@@ -19,7 +19,7 @@ interface FormValues {
 const BasicDetails: React.FC<Props> = (props) => {
   const { formik } = props;
   return (
-    <div className="mt-5 pt-4 mx-5 px-5">
+    <div className="mt-5 pt-4 mx-5 px-5" style={{ height: "44vh" }}>
       <Grid container rowSpacing={3} columnSpacing={{ xs: 0, sm: 5, md: 4 }}>
         <Grid item xs={12} sm={6} md={6}>
           <FormLabel className="fw-bold">Role</FormLabel>
@@ -212,7 +212,9 @@ const BasicDetails: React.FC<Props> = (props) => {
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={6} md={6}>
-          <FormLabel className="fw-bold">Contract Duration(if contract)</FormLabel>
+          <FormLabel className="fw-bold">
+            Contract Duration(if contract)
+          </FormLabel>
           <TextField
             id="contractDuration"
             name="contractDuration"

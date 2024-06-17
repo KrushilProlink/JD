@@ -10,20 +10,22 @@ import axios from "axios";
 const API_URL = import.meta.env.VITE_APP_API_URL;
 
 const loginSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Wrong email format")
-    .min(3, "Minimum 3 symbols")
-    .max(50, "Maximum 50 symbols")
-    .required("Email is required"),
-  password: Yup.string()
-    .min(3, "Minimum 3 symbols")
-    .max(50, "Maximum 50 symbols")
-    .required("Password is required"),
+  // email: Yup.string()
+  //   .email("Wrong email format")
+  //   .min(3, "Minimum 3 symbols")
+  //   .max(50, "Maximum 50 symbols")
+  //   .required("Email is required"),
+  // password: Yup.string()
+  //   .min(3, "Minimum 3 symbols")
+  //   .max(50, "Maximum 50 symbols")
+  //   .required("Password is required"),
+  username: Yup.string().required("User Name is required"),
+  password: Yup.string().required("Password is required"),
 });
 
 const initialValues = {
-  email: "",
-  password: "",
+  username: "john_doe",
+  password: "securepassword",
 };
 
 /*
@@ -42,35 +44,29 @@ export function Login() {
     initialValues,
     validationSchema: loginSchema,
     onSubmit: async (values, { setStatus, setSubmitting }) => {
-      setLoading(true);
-      try {
-        const payload = {
-          user_name: values?.email,
-          password: values?.password,
-        };
-        const res = await axios.post(`${API_URL}/asterisk-login`, payload);
-        if (res?.status === 200) {
-          localStorage.setItem("login", "isTrue");
-          document.location.reload();
-          navigate("/");
-        }
-        // .then(function (response) {
-        //   console.log(response);
-        // })
-        // .catch(function (error) {
-        //   console.log(error);
-        // });
-        // const { data: auth } = await login(values.email, values.password)
-        // saveAuth(auth)
-        // const { data: user } = await getUserByToken(auth.api_token)
-        // setCurrentUser(user)
-      } catch (error) {
-        console.error(error);
-        // saveAuth(undefined)
-        setStatus("The login details are incorrect");
-        // setSubmitting(false)
-      }
-      setLoading(false);
+      const userData = { token: "abc123", userRole: "recruiter", userId: "1" };
+      localStorage.setItem("userDetails", JSON.stringify(userData));
+      document.location.reload();
+      navigate("/");
+      // setLoading(true);
+      // try {
+      //   const payload = {
+      //     user_name: values?.username,
+      //     password: values?.password,
+      //   };
+      //   const res = await axios.post(`${API_URL}/asterisk-login`, payload);
+      //   if (res?.status === 200) {
+      //     localStorage.setItem("login", "isTrue");
+      //     document.location.reload();
+      //     navigate("/");
+      //   }
+      // } catch (error) {
+      //   console.error(error);
+      //   // saveAuth(undefined)
+      //   setStatus("The login details are incorrect");
+      //   // setSubmitting(false)
+      // }
+      // setLoading(false);
     },
   });
 
@@ -102,25 +98,26 @@ export function Login() {
 
       {/* begin::Form group */}
       <div className="fv-row mb-8">
-        <label className="form-label fs-6 fw-bolder text-gray-900">Email</label>
+        <label className="form-label fs-6 fw-bolder text-gray-900">
+          User Name
+        </label>
         <input
-          placeholder="Email"
-          {...formik.getFieldProps("email")}
+          placeholder="User Name"
+          {...formik.getFieldProps("username")}
           className={clsx(
             "form-control bg-transparent",
-            { "is-invalid": formik.touched.email && formik.errors.email },
+            { "is-invalid": formik.touched.username && formik.errors.username },
             {
-              "is-valid": formik.touched.email && !formik.errors.email,
+              "is-valid": formik.touched.username && !formik.errors.username,
             }
           )}
-          type="email"
-          name="email"
+          name="username"
           autoComplete="off"
         />
-        {formik.touched.email && formik.errors.email && (
+        {formik.touched.username && formik.errors.username && (
           <div className="fv-plugins-message-container">
             <div className="fv-help-block">
-              <span role="alert">{formik.errors.email}</span>
+              <span role="alert">{formik.errors.username}</span>
             </div>
           </div>
         )}

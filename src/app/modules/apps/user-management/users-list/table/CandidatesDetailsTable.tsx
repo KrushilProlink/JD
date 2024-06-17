@@ -1,14 +1,15 @@
-import { FC, useState, useEffect } from "react";
-import { KTIcon, toAbsoluteUrl } from "../../../../../../_metronic/helpers";
-import axios from "axios";
-import TablePagination from "@mui/material/TablePagination";
-import DownloadIcon from "@mui/icons-material/Download";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import QueryStatsIcon from "@mui/icons-material/QueryStats";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import TablePagination from "@mui/material/TablePagination";
+import axios from "axios";
+import { FC, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { KTIcon } from "../../../../../../_metronic/helpers";
 import ViewCandidate from "../../form/ViewCandidate";
+import ViewJDvsCVAnalysis from "../../form/ViewJDvsCVAnalysis";
 const API_URL = import.meta.env.VITE_APP_API_URL;
 
 type RecruiterCall = {
@@ -40,8 +41,9 @@ const CandidatesDetailsTable: FC = () => {
     []
   );
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenAnalysisView, setIsOpenAnalysisView] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [reportData, setReportData] = useState<CallReport>({});
   const location = useLocation();
@@ -108,6 +110,11 @@ const CandidatesDetailsTable: FC = () => {
   return (
     <>
       <ViewCandidate open={isOpen} handleClose={() => setIsOpen(false)} />
+      <ViewJDvsCVAnalysis
+        open={isOpenAnalysisView}
+        handleClose={() => setIsOpenAnalysisView(false)}
+      />
+
       <div className="card-header border-0 pt-6">
         {/* <div className="card-title">
           <div className="d-flex align-items-center position-relative my-1">
@@ -203,6 +210,7 @@ const CandidatesDetailsTable: FC = () => {
           >
             <button
               className="btn btn-sm btn-light-primary"
+              onClick={() => navigate("add")}
               // data-bs-toggle='modal'
               // data-bs-target='#kt_modal_invite_friends'
             >
@@ -265,7 +273,7 @@ const CandidatesDetailsTable: FC = () => {
                           {item?.status || "-"}
                         </td>
 
-                        <td className="text-gray-900 fw-bold text-hover-primary fs-6  text-center">
+                        <td className="text-gray-900 fw-bold text-hover-primary fs-6  text-center d-flex flex-nowrap justify-content-center">
                           <span
                             className=" btn btn-bg-secondary btn-color-muted btn-active-color-primary btn-sm p-2"
                             onClick={() => setIsOpen(true)}
@@ -300,6 +308,20 @@ const CandidatesDetailsTable: FC = () => {
                               title="Delete"
                             >
                               <DeleteIcon style={{ cursor: "pointer" }} />
+                            </div>
+                          </span>
+                          <span
+                            className="flex-shrink-0 btn btn-bg-secondary btn-color-muted btn-active-color-primary btn-sm p-2 ms-2"
+                            onClick={() => setIsOpenAnalysisView(true)}
+                          >
+                            <div
+                              className="card-toolbar"
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              data-bs-trigger="hover"
+                              title="Analysis Details"
+                            >
+                              <QueryStatsIcon style={{ cursor: "pointer" }} />
                             </div>
                           </span>
                         </td>
@@ -345,9 +367,9 @@ const CandidatesDetailsTable: FC = () => {
               {/* end::Table body */}
             </table>
 
-            {candidateList?.length > 0 && !isLoading && (
+            {candidateList?.length > 10 && !isLoading && (
               <TablePagination
-                rowsPerPageOptions={[5, 25, 100]}
+                rowsPerPageOptions={[10, 25, 100]}
                 component="div"
                 count={candidateList.length}
                 rowsPerPage={rowsPerPage}

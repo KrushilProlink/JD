@@ -1,33 +1,30 @@
 /* eslint-disable react/prop-types */
+import ApartmentIcon from "@mui/icons-material/Apartment";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import Check from "@mui/icons-material/Check";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { Box, Button, Step, StepLabel, Stepper } from "@mui/material";
-import PropTypes from "prop-types";
-import { FormikHelpers, useFormik } from "formik";
-import * as React from "react";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
-import SettingsIcon from "@mui/icons-material/Settings";
-import GroupAddIcon from "@mui/icons-material/GroupAdd";
+import SchoolIcon from "@mui/icons-material/School";
 import VideoLabelIcon from "@mui/icons-material/VideoLabel";
+import WorkIcon from "@mui/icons-material/Work";
+import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
+import { Box, Button, Step, StepLabel, Stepper } from "@mui/material";
 import StepConnector, {
   stepConnectorClasses,
 } from "@mui/material/StepConnector";
-import { styled } from "@mui/material/styles";
-import { useNavigate } from "react-router";
-import SchoolIcon from "@mui/icons-material/School";
-import * as yup from "yup";
-import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
-import AssignmentIcon from "@mui/icons-material/Assignment";
 import { StepIconProps } from "@mui/material/StepIcon";
-import Check from "@mui/icons-material/Check";
+import { styled } from "@mui/material/styles";
+import { FormikHelpers, useFormik } from "formik";
+import * as React from "react";
+import { useNavigate } from "react-router";
+import * as yup from "yup";
 import { MyDropzone } from "../components/FileUload";
-import WorkIcon from "@mui/icons-material/Work";
-import ApartmentIcon from "@mui/icons-material/Apartment";
-import BasicDetails from "./recruiterStepperForm/BasicDetails";
-import CertificationDetails from "./recruiterStepperForm/CertificationDetails";
-import CompanyDetails from "./recruiterStepperForm/CompanyDetails";
-import EducationQualification from "./recruiterStepperForm/EducationQualification";
-import JobRegarding from "./recruiterStepperForm/JobRegarding";
-import Skills from "./recruiterStepperForm/Skills";
+import BasicDetails from "./candidateStepperForm/BasicDetails";
+import AddressDetails from "./candidateStepperForm/AddressDetails";
+import CertificationDetails from "./candidateStepperForm/CertificationDetails";
+import EducationDetails from "./candidateStepperForm/EducationDetails";
+import ExperienceDetails from "./candidateStepperForm/ExperienceDetails";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 const QontoStepIconRoot = styled("div")<{ ownerState: { active?: boolean } }>(
   ({ theme, ownerState }) => ({
@@ -121,7 +118,7 @@ function ColorlibStepIcon(props: StepIconProps) {
   const icons: { [index: string]: React.ReactElement } = {
     1: <FileUploadIcon />,
     2: <AssignmentIcon />,
-    3: <VideoLabelIcon />,
+    3: <LocationOnIcon />,
     4: <WorkspacePremiumIcon />,
     5: <SchoolIcon />,
     6: <WorkIcon />,
@@ -190,89 +187,97 @@ interface FormValues {
   addAltSkills: string;
 }
 
-const Add: React.FC = () => {
+const AddCandidate: React.FC = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set<number>());
   const [initialValue, setInitialValue] = React.useState<any>({
-    role: "",
-    minimumExperience: "",
-    maximumExperience: "",
-    jobLocation: {
-      city: "",
-      state: "",
-      country: "",
+    firstName: "",
+    lastName: "",
+    phone: {
+      countryCode: "",
+      number: "",
     },
-    minimumSalary: "",
-    maximumSalary: "",
-    workType: "",
-    jobType: "",
-    contractDuration: "",
-    skills: [],
-    category: "",
-    usageContext: "",
-    alternativeSkills: [],
-    mandatory: "",
-    relevantExperience: "",
+    emailAddress: "",
+    addressLineOne: "",
+    addressLineTwo: "",
+    city: "",
+    zipCode: "",
+    state: "",
+    country: "",
     certifications: [
       {
-        certificationName: "",
-        certificationVendor: "",
+        name: "",
+        issueDate: "",
+        expirationDate: "",
+        issuedBy: "",
       },
     ],
-    qualifications: [],
-    jdSummary: "",
-    jobResponsibilities: "",
-    jobRequirements: "",
-    companyName: "",
-    companyWebsite: "",
-    companyHeadquarter: "",
+    experience: [
+      {
+        companyName: "",
+        startDate: "",
+        lastDate: "",
+        location: "",
+        jobTitle: "",
+        comments: "",
+      },
+    ],
+    degree: [],
+    major: "",
+    score: "",
+    issuedOn: "",
+    school_collegeName: "",
+    location: "",
   });
   const [formValue, setFormValue] = React.useState<any>({});
 
   const basicDetailsFormInitialValue = {
-    role: "",
-    minimumExperience: "",
-    maximumExperience: "",
-    jobLocation: {
-      city: "",
-      state: "",
-      country: "",
+    firstName: "",
+    lastName: "",
+    phone: {
+      countryCode: "",
+      number: "",
     },
-    minimumSalary: "",
-    maximumSalary: "",
-    workType: "",
-    jobType: "",
-    contractDuration: "",
+    emailAddress: "",
   };
-  const skillsFormInitialValue = {
-    skills: [],
-    category: "",
-    usageContext: "",
-    alternativeSkills: [],
-    mandatory: "",
-    relevantExperience: "",
+  const addressFormInitialValue = {
+    addressLineOne: "",
+    addressLineTwo: "",
+    city: "",
+    zipCode: "",
+    state: "",
+    country: "",
   };
-  const certificationFormInitialValue = {
+  const certificationsFormInitialValue = {
     certifications: [
       {
-        certificationName: "",
-        certificationVendor: "",
+        name: "",
+        issueDate: "",
+        expirationDate: "",
+        issuedBy: "",
+      },
+    ],
+  };
+  const experienceFormInitialValue = {
+    experience: [
+      {
+        companyName: "",
+        startDate: "",
+        lastDate: "",
+        location: "",
+        jobTitle: "",
+        comments: "",
       },
     ],
   };
 
-  const qualificationFormInitialValue = {
-    qualifications: [],
-  };
-  const jobRegardingFormInitialValue = {
-    jdSummary: "",
-    jobResponsibilities: "",
-    jobRequirements: "",
-  };
-  const companyDetailsFormInitialValue = {
-    companyName: "",
-    companyWebsite: "",
-    companyHeadquarter: "",
+  const educationFormInitialValue = {
+    degree: [],
+    major: "",
+    score: "",
+    issuedOn: "",
+    school_collegeName: "",
+    location: "",
   };
 
   const navigate = useNavigate();
@@ -329,13 +334,13 @@ const Add: React.FC = () => {
 
   const steps = [
     {
-      label: "Upload JD",
+      label: "Upload CV",
       validation: validationSchema,
-      initialValue: basicDetailsFormInitialValue,
+      initialValue: "",
       component: (
         <MyDropzone
           handleChangeStep={() => setActiveStep(1)}
-          title="Upload JD"
+          title="Upload CV"
         />
       ),
     },
@@ -346,34 +351,28 @@ const Add: React.FC = () => {
       component: <BasicDetails />,
     },
     {
-      label: "Skills",
+      label: "Address",
       validation: validationSchema,
-      initialValue: skillsFormInitialValue,
-      component: <Skills />,
+      initialValue: addressFormInitialValue,
+      component: <AddressDetails />,
     },
     {
       label: "Certification Details",
       validation: validationSchema,
-      initialValue: certificationFormInitialValue,
+      initialValue: certificationsFormInitialValue,
       component: <CertificationDetails />,
     },
     {
-      label: "Education Qualification",
+      label: "Education Details",
       validation: validationSchema,
-      initialValue: qualificationFormInitialValue,
-      component: <EducationQualification />,
+      initialValue: educationFormInitialValue,
+      component: <EducationDetails />,
     },
     {
-      label: "Job Regarding",
+      label: "Experience Details",
       validation: validationSchema,
-      initialValue: jobRegardingFormInitialValue,
-      component: <JobRegarding />,
-    },
-    {
-      label: "Company Details",
-      validation: validationSchema,
-      initialValue: companyDetailsFormInitialValue,
-      component: <CompanyDetails />,
+      initialValue: experienceFormInitialValue,
+      component: <ExperienceDetails />,
     },
   ];
 
@@ -524,4 +523,4 @@ const Add: React.FC = () => {
   );
 };
 
-export default Add;
+export default AddCandidate;
