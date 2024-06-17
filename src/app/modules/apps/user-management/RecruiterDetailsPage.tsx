@@ -23,9 +23,9 @@ const RecruiterDetailsPage = () => {
           element={
             <>
               <PageTitle>Add New</PageTitle>
-              <KTCard>
+              {/* <KTCard> */}
                 <Add />
-              </KTCard>
+              {/* </KTCard> */}
             </>
           }
         />

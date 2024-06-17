@@ -50,7 +50,7 @@ const EducationQualification: React.FC<Props> = (props) => {
     formik.setFieldValue("qualifications", newTags);
   };
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <div style={{ display: "flex", justifyContent: "center" }} className="mt-5 pt-4 mx-5 px-5">
       <Grid
         container
         rowSpacing={3}
@@ -60,7 +60,7 @@ const EducationQualification: React.FC<Props> = (props) => {
         }}
       >
         <Grid item xs={12}>
-          <FormLabel>Education Qualification</FormLabel>
+          <FormLabel className="fw-bold">Education Qualification</FormLabel>
           <ul
             id="tags"
             style={{

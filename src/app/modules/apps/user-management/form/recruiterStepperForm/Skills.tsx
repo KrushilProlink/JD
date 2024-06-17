@@ -86,15 +86,14 @@ const Skills: React.FC<Props> = (props) => {
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <div style={{ display: "flex", justifyContent: "center" }} className="mt-5 pt-4 mx-5 px-5">
       <Grid
         container
         rowSpacing={3}
         columnSpacing={{ xs: 0, sm: 5, md: 4 }}
-        style={{ width: "50%" }}
       >
-        <Grid item xs={12}>
-          <FormLabel>Skills Name</FormLabel>
+        <Grid item  xs={12} sm={6} md={6}>
+          <FormLabel className="fw-bold">Skills Name</FormLabel>
           <ul
             id="tags"
             style={{
@@ -150,8 +149,8 @@ const Skills: React.FC<Props> = (props) => {
             />
           </ul>
         </Grid>
-        <Grid item xs={12} sm={12} md={12}>
-          <FormLabel>Category</FormLabel>
+        <Grid item  xs={12} sm={6} md={6} >
+          <FormLabel className="fw-bold">Category</FormLabel>
           <TextField
             id="category"
             name="category"
@@ -167,8 +166,8 @@ const Skills: React.FC<Props> = (props) => {
             helperText={formik?.touched?.category && formik?.errors?.category}
           />
         </Grid>
-        <Grid item xs={12} sm={12} md={12}>
-          <FormLabel>Usage Context</FormLabel>
+        <Grid item  xs={12} sm={6} md={6} >
+          <FormLabel className="fw-bold">Usage Context</FormLabel>
           <TextField
             id="usageContext"
             name="usageContext"
@@ -186,8 +185,8 @@ const Skills: React.FC<Props> = (props) => {
             }
           />
         </Grid>
-        <Grid item xs={12} sm={12} md={12}>
-          <FormLabel>Alternative Skills</FormLabel>
+        <Grid item  xs={12} sm={6} md={6}>
+          <FormLabel className="fw-bold">Alternative Skills</FormLabel>
           <ul
             id="tags"
             style={{
@@ -254,8 +253,8 @@ const Skills: React.FC<Props> = (props) => {
             />
           </ul>
         </Grid>
-        <Grid item xs={12} sm={12} md={12}>
-          <FormLabel>Mandatory</FormLabel>
+        <Grid item  xs={12} sm={6} md={6} >
+          <FormLabel className="fw-bold">Mandatory</FormLabel>
           <TextField
             id="mandatory"
             name="mandatory"
@@ -270,8 +269,8 @@ const Skills: React.FC<Props> = (props) => {
             helperText={formik?.touched?.mandatory && formik?.errors?.mandatory}
           />
         </Grid>
-        <Grid item xs={12} sm={12} md={12}>
-          <FormLabel>Relevant Experience</FormLabel>
+        <Grid item  xs={12} sm={6} md={6} >
+          <FormLabel className="fw-bold">Relevant Experience</FormLabel>
           <TextField
             id="relevantExperience"
             name="relevantExperience"

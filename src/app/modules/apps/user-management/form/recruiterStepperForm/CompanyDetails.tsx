@@ -16,7 +16,7 @@ const CompanyDetails: React.FC<Props> = (props) => {
   const { formik } = props;
 
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <div style={{ display: "flex", justifyContent: "center" }} className="mt-5 pt-4 mx-5 px-5">
       <Grid
         container
         rowSpacing={3}
@@ -24,7 +24,7 @@ const CompanyDetails: React.FC<Props> = (props) => {
         style={{ width: "50%" }}
       >
         <Grid item xs={12} sm={12} md={12}>
-          <FormLabel>Company Name</FormLabel>
+          <FormLabel className="fw-bold">Company Name</FormLabel>
           <TextField
             id="companyName"
             name="companyName"
@@ -42,7 +42,7 @@ const CompanyDetails: React.FC<Props> = (props) => {
           />
         </Grid>
         <Grid item xs={12} sm={12} md={12}>
-          <FormLabel>Company Website</FormLabel>
+          <FormLabel className="fw-bold">Company Website</FormLabel>
           <TextField
             id="companyWebsite"
             name="companyWebsite"
@@ -60,7 +60,7 @@ const CompanyDetails: React.FC<Props> = (props) => {
           />
         </Grid>
         <Grid item xs={12} sm={12} md={12}>
-          <FormLabel>Company Headquarter</FormLabel>
+          <FormLabel className="fw-bold">Company Headquarter</FormLabel>
           <TextField
             id="companyHeadquarter"
             name="companyHeadquarter"

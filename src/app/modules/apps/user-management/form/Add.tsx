@@ -1,43 +1,166 @@
 /* eslint-disable react/prop-types */
-import ClearIcon from "@mui/icons-material/Clear";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import { FieldArray, FormikHelpers, useFormik } from "formik";
-import * as React from "react";
-import * as yup from "yup";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import {
-  Stepper,
+  Box,
+  Button,
   Step,
   StepLabel,
-  Button,
-  Typography,
-  Box,
-  Grid,
-  FormLabel,
-  TextField,
-  FormControl,
-  Select,
-  MenuItem,
-  IconButton,
-  FormHelperText,
-  Chip,
+  Stepper
 } from "@mui/material";
-import { MyDropzone } from "../components/FileUload";
+import PropTypes from 'prop-types';
+import { FormikHelpers, useFormik } from "formik";
+import * as React from "react";
+import FileUploadIcon from '@mui/icons-material/FileUpload';
+import SettingsIcon from '@mui/icons-material/Settings';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import VideoLabelIcon from '@mui/icons-material/VideoLabel';
+import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
+import { styled } from '@mui/material/styles';
 import { useNavigate } from "react-router";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { MdAddCircleOutline, MdRemoveCircleOutline } from "react-icons/md";
-import { IoMdCloseCircleOutline } from "react-icons/io";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { Badge, Form } from "react-bootstrap";
+import SchoolIcon from '@mui/icons-material/School';
+import * as yup from "yup";
+import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import { StepIconProps } from '@mui/material/StepIcon';
+import Check from '@mui/icons-material/Check';
+import { MyDropzone } from "../components/FileUload";
+import WorkIcon from '@mui/icons-material/Work';
+import ApartmentIcon from '@mui/icons-material/Apartment';
 import BasicDetails from "./recruiterStepperForm/BasicDetails";
-import Skills from "./recruiterStepperForm/Skills";
 import CertificationDetails from "./recruiterStepperForm/CertificationDetails";
+import CompanyDetails from "./recruiterStepperForm/CompanyDetails";
 import EducationQualification from "./recruiterStepperForm/EducationQualification";
 import JobRegarding from "./recruiterStepperForm/JobRegarding";
-import CompanyDetails from "./recruiterStepperForm/CompanyDetails";
+import Skills from "./recruiterStepperForm/Skills";
+
+
+const QontoStepIconRoot = styled('div')<{ ownerState: { active?: boolean } }>(
+  ({ theme, ownerState }) => ({
+    color: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#eaeaf0',
+    display: 'flex',
+    height: 22,
+    alignItems: 'center',
+    ...(ownerState.active && {
+      color: '#1b84ff',
+    }),
+    '& .QontoStepIcon-completedIcon': {
+      color: '#1b84ff',
+      zIndex: 1,
+      fontSize: 18,
+    },
+    '& .QontoStepIcon-circle': {
+      width: 8,
+      height: 8,
+      borderRadius: '50%',
+      backgroundColor: 'currentColor',
+    },
+  }),
+);
+
+function QontoStepIcon(props: StepIconProps) {
+  const { active, completed, className } = props;
+
+  return (
+    <QontoStepIconRoot ownerState={{ active }} className={className}>
+      {completed ? (
+        <Check className="QontoStepIcon-completedIcon" />
+      ) : (
+        <div className="QontoStepIcon-circle" />
+      )}
+    </QontoStepIconRoot>
+  );
+}
+
+const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
+  [`&.${stepConnectorClasses.alternativeLabel}`]: {
+    top: 22,
+  },
+  [`&.${stepConnectorClasses.active}`]: {
+    [`& .${stepConnectorClasses.line}`]: {
+      backgroundImage:
+        'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(42,42,215,1) 0%, rgba(0,212,255,1) 100%)',
+    },
+  },
+  [`&.${stepConnectorClasses.completed}`]: {
+    [`& .${stepConnectorClasses.line}`]: {
+      backgroundImage:
+        'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(42,42,215,1) 0%, rgba(0,212,255,1) 100%)',
+    },
+  },
+  [`& .${stepConnectorClasses.line}`]: {
+    height: 3,
+    border: 0,
+    backgroundColor:
+      theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#eaeaf0',
+    borderRadius: 1,
+  },
+}));
+
+const ColorlibStepIconRoot = styled('div')<{
+  ownerState: { completed?: boolean; active?: boolean };
+}>(({ theme, ownerState }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#ccc',
+  zIndex: 1,
+  color: '#fff',
+  width: 40,
+  height: 40,
+  display: 'flex',
+  borderRadius: '50%',
+  justifyContent: 'center',
+  alignItems: 'center',
+  ...(ownerState.active && {
+    backgroundImage:
+      ' linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(42,42,215,1) 0%, rgba(0,212,255,1) 100%)',
+    boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
+  }),
+  ...(ownerState.completed && {
+    backgroundImage:
+      ' linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(42,42,215,1) 0%, rgba(0,212,255,1) 100%)',
+  }),
+}));
+
+function ColorlibStepIcon(props: StepIconProps) {
+  const { active, completed, className } = props;
+
+  const icons: { [index: string]: React.ReactElement } = {
+    1: <FileUploadIcon />,
+    2: <AssignmentIcon />,
+    3: <VideoLabelIcon />,
+    4: <WorkspacePremiumIcon />,
+    5: <SchoolIcon />,
+    6: <WorkIcon />,
+    7: <ApartmentIcon />,
+  };
+
+  return (
+    <ColorlibStepIconRoot ownerState={{ completed, active }} className={className}>
+      {icons[String(props.icon)]}
+    </ColorlibStepIconRoot>
+  );
+}
+
+// const QontoConnector = styled(StepConnector)(({ theme }) => ({
+//   [`&.${stepConnectorClasses.alternativeLabel}`]: {
+//     top: 10,
+//     left: 'calc(-50% + 16px)',
+//     right: 'calc(50% + 16px)',
+//   },
+//   [`&.${stepConnectorClasses.active}`]: {
+//     [`& .${stepConnectorClasses.line}`]: {
+//       borderColor: '#1976d2',
+//     },
+//   },
+//   [`&.${stepConnectorClasses.completed}`]: {
+//     [`& .${stepConnectorClasses.line}`]: {
+//       borderColor: '#1976d2',
+//     },
+//   },
+//   [`& .${stepConnectorClasses.line}`]: {
+//     borderColor: theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#eaeaf0',
+//     borderTopWidth: 3,
+//     borderRadius: 1,
+//   },
+// }));
 
 const steps = [
   "Upload JD",
@@ -282,11 +405,11 @@ const Add: React.FC = () => {
 
   return (
     <div>
-      <div className="card-header border-0 pt-6">
+      <div className="border-0">
         <div>
           <button
             type="button"
-            className="btn btn-light-primary"
+            className="btn btn-light-primary mb-5"
             onClick={() => navigate(-1)}
           >
             <span>
@@ -296,9 +419,9 @@ const Add: React.FC = () => {
           </button>
         </div>
       </div>
-      <div className="card-body py-3">
-        <Box sx={{ width: "100%" }}>
-          <Stepper activeStep={activeStep} alternativeLabel className="py-5">
+      <div className="card-body py-3 rounded-3" style={{boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px'}}>
+        <Box sx={{ width: "100%",height:"680px",position:"relative"}} pt={3} px={2}>
+          <Stepper activeStep={activeStep} alternativeLabel  connector={<ColorlibConnector />} className="py-5">
             {steps.map((item, index) => {
               const stepProps: { completed?: boolean } = {};
               const labelProps: {
@@ -311,16 +434,16 @@ const Add: React.FC = () => {
                 <Step
                   key={item?.label}
                   {...stepProps}
-                  style={{ fontSize: "25px" }}
+                  style={{ fontSize: "25px",fontWeight:"bold" }}
                 >
-                  <StepLabel {...labelProps}>{item?.label}</StepLabel>
+                  <StepLabel StepIconComponent={ColorlibStepIcon} {...labelProps} style={{fontWeight:"900"}}>{item?.label}</StepLabel>
                 </Step>
               );
             })}
           </Stepper>
           {activeStep === steps.length ? (
             <React.Fragment>
-              <Box sx={{ textAlign: "center", pt: 2 }}>
+              <Box sx={{ textAlign: "center", pt: 4 }} px={5}>
                 <Box sx={{ flex: "1 1 auto" }} />
                 <Button
                   onClick={() => {
@@ -328,6 +451,7 @@ const Add: React.FC = () => {
                     navigate(-1);
                   }}
                   variant="outlined"
+                  className="fw-bold"
                 >
                   Save
                 </Button>
@@ -337,19 +461,21 @@ const Add: React.FC = () => {
             <React.Fragment>
               {steps?.map((item, index) => (
                 // <Box mt={3}>{activeStep === index && item?.component}</Box>
-                <Box mt={3}>
+                <Box mt={3} style={{overflowY:"auto"}}>
                   {activeStep === index &&
                     React.cloneElement(item.component, { formik })}
                 </Box>
               ))}
 
-              <Box sx={{ display: "flex", flexDirection: "row", pt: 5, pb: 4 }}>
+              <Box sx={{ display: "flex", flexDirection: "row", pt: 4,position:"absolute",bottom:"18px",width:"97%"}}>
                 <Button
                   color="inherit"
                   disabled={activeStep === 0}
                   onClick={() => handleBack(formik?.values)}
                   sx={{ mr: 1 }}
                   variant="outlined"
+                  className="fw-bold"
+
                 >
                   Back
                 </Button>
@@ -360,6 +486,8 @@ const Add: React.FC = () => {
                   }
                   type={activeStep === steps.length - 1 ? "submit" : "button"}
                   variant="outlined"
+                  className="fw-bold"
+
                 >
                   {activeStep === steps.length - 1 ? "Finish" : "Next"}
                 </Button>

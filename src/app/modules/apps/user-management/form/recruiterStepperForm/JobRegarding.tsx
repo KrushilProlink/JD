@@ -15,7 +15,7 @@ interface Props {
 const JobRegarding: React.FC<Props> = (props) => {
   const { formik } = props;
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <div style={{ display: "flex", justifyContent: "center" }} className="mt-5 pt-4 mx-5 px-5">
       <Grid
         container
         rowSpacing={3}
@@ -23,7 +23,7 @@ const JobRegarding: React.FC<Props> = (props) => {
         style={{ width: "50%" }}
       >
         <Grid item xs={12} sm={12} md={12}>
-          <FormLabel>Jd Summary</FormLabel>
+          <FormLabel className="fw-bold">Jd Summary</FormLabel>
           <TextField
             id="jdSummary"
             name="jdSummary"
@@ -40,7 +40,7 @@ const JobRegarding: React.FC<Props> = (props) => {
           />
         </Grid>
         <Grid item xs={12} sm={12} md={12}>
-          <FormLabel>Job Responsibilities</FormLabel>
+          <FormLabel className="fw-bold">Job Responsibilities</FormLabel>
           <TextField
             id="jobResponsibilities"
             name="jobResponsibilities"
@@ -61,7 +61,7 @@ const JobRegarding: React.FC<Props> = (props) => {
           />
         </Grid>
         <Grid item xs={12} sm={12} md={12}>
-          <FormLabel>Job Requirements</FormLabel>
+          <FormLabel className="fw-bold">Job Requirements</FormLabel>
           <TextField
             id="jobRequirements"
             name="jobRequirements"

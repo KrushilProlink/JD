@@ -19,10 +19,10 @@ interface FormValues {
 const BasicDetails: React.FC<Props> = (props) => {
   const { formik } = props;
   return (
-    <div>
+    <div className="mt-5 pt-4 mx-5 px-5">
       <Grid container rowSpacing={3} columnSpacing={{ xs: 0, sm: 5, md: 4 }}>
         <Grid item xs={12} sm={6} md={6}>
-          <FormLabel>Role</FormLabel>
+          <FormLabel className="fw-bold">Role</FormLabel>
           <TextField
             id="role"
             name="role"
@@ -38,7 +38,7 @@ const BasicDetails: React.FC<Props> = (props) => {
         </Grid>
 
         <Grid item xs={12} sm={6} md={6}>
-          <FormLabel>Minimum Experience</FormLabel>
+          <FormLabel className="fw-bold">Minimum Experience</FormLabel>
           <TextField
             id="minimumExperience"
             name="minimumExperience"
@@ -58,7 +58,7 @@ const BasicDetails: React.FC<Props> = (props) => {
           />
         </Grid>
         <Grid item xs={12} sm={6} md={6}>
-          <FormLabel>Maximum Experience</FormLabel>
+          <FormLabel className="fw-bold">Maximum Experience</FormLabel>
           <TextField
             id="maximumExperience"
             name="maximumExperience"
@@ -78,7 +78,7 @@ const BasicDetails: React.FC<Props> = (props) => {
           />
         </Grid>
         <Grid item xs={12} sm={6} md={6}>
-          <FormLabel>City</FormLabel>
+          <FormLabel className="fw-bold">City</FormLabel>
           <TextField
             id="city"
             name="jobLocation.city"
@@ -99,7 +99,7 @@ const BasicDetails: React.FC<Props> = (props) => {
           />
         </Grid>
         <Grid item xs={12} sm={6} md={6}>
-          <FormLabel>State</FormLabel>
+          <FormLabel className="fw-bold">State</FormLabel>
           <TextField
             id="state"
             name="jobLocation.state"
@@ -119,7 +119,7 @@ const BasicDetails: React.FC<Props> = (props) => {
           />
         </Grid>
         <Grid item xs={12} sm={6} md={6}>
-          <FormLabel>Country</FormLabel>
+          <FormLabel className="fw-bold">Country</FormLabel>
           <TextField
             id="country"
             name="jobLocation.country"
@@ -139,7 +139,7 @@ const BasicDetails: React.FC<Props> = (props) => {
           />
         </Grid>
         <Grid item xs={12} sm={6} md={6}>
-          <FormLabel>Minimum Salary</FormLabel>
+          <FormLabel className="fw-bold">Minimum Salary</FormLabel>
           <TextField
             id="minimumSalary"
             name="minimumSalary"
@@ -158,7 +158,7 @@ const BasicDetails: React.FC<Props> = (props) => {
           />
         </Grid>
         <Grid item xs={12} sm={6} md={6}>
-          <FormLabel>Maximum Salary</FormLabel>
+          <FormLabel className="fw-bold">Maximum Salary</FormLabel>
           <TextField
             id="maximumSalary"
             name="maximumSalary"
@@ -178,7 +178,7 @@ const BasicDetails: React.FC<Props> = (props) => {
         </Grid>
         <Grid item xs={12} sm={6} md={6}>
           <FormControl fullWidth>
-            <FormLabel>Work Type</FormLabel>
+            <FormLabel className="fw-bold">Work Type</FormLabel>
             <Select
               labelId="demo-simple-select-label"
               id="workType"
@@ -196,7 +196,7 @@ const BasicDetails: React.FC<Props> = (props) => {
         </Grid>
         <Grid item xs={12} sm={6} md={6}>
           <FormControl fullWidth>
-            <FormLabel>Job Type</FormLabel>
+            <FormLabel className="fw-bold">Job Type</FormLabel>
             <Select
               labelId="demo-simple-select-label"
               id="jobType"
@@ -212,7 +212,7 @@ const BasicDetails: React.FC<Props> = (props) => {
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={6} md={6}>
-          <FormLabel>Contract Duration(if contract)</FormLabel>
+          <FormLabel className="fw-bold">Contract Duration(if contract)</FormLabel>
           <TextField
             id="contractDuration"
             name="contractDuration"

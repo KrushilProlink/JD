@@ -52,7 +52,7 @@ const CertificationDetails: React.FC<Props> = (props) => {
   console.log(formik?.values, "formik?.values?.certifications");
 
   return (
-    <div>
+    <div className="mt-5 pt-4 mx-5 px-5">
       <Grid
         container
         rowSpacing={3}
@@ -63,7 +63,7 @@ const CertificationDetails: React.FC<Props> = (props) => {
           (certification: any, index: number) => (
             <>
               <Grid item xs={12} sm={5} md={5}>
-                <FormLabel>Certification Name</FormLabel>
+                <FormLabel className="fw-bold">Certification Name</FormLabel>
                 <TextField
                   id={`certificationName-${index}`}
                   name="certifications.certificationName"
@@ -74,7 +74,7 @@ const CertificationDetails: React.FC<Props> = (props) => {
                 />
               </Grid>
               <Grid item xs={12} sm={5} md={5}>
-                <FormLabel>Certification Vendor</FormLabel>
+                <FormLabel className="fw-bold">Certification Vendor</FormLabel>
                 <TextField
                   id={`certificationVendor-${index}`}
                   name="certifications.certificationVendor"
